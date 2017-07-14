@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <resultMap id="baseResultMap" type="User">
+        <id column="id" property="id" jdbcType="DECIMAL" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectIf" resultMap="baseResultMap">
+        SELECT * FROM sys_user
+    </select>
+
+    <update id="update" parameterType="User">
+        UPDATE sys_user
+        <set>
+            <if test="username != null">
+                username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password, jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id, jdbcType=DECIMAL}
+    </update>
+
+    <select id="getEnum">
+        SELECT * FROM sys_user
+    </select>
+
+    <select id="detail" parameterType="com.example.demo.entity.User" resultMap="baseResultMap">
+        SELECT id, username, password FROM sys_user WHERE ID = #{id}
+    </select>
+
+    <select id="list" parameterType="User" resultMap="baseResultMap">
+        SELECT id, username, password FROM sys_user
+    </select>
+</mapper>

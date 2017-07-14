@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+666
+<p>342扔 44脸4手777777777777  看</p>
+
+<p th:text="*{info}">8888</p>
+<p th:text="${info2}">新增info2</p>
+
+<div th:object="${pageInfo}">
+    <p>id:<span th:text="*{pageNum}"></span></p>
+    <p>id:<span th:text="*{pageSize}"></span></p>
+    <p>username:<span th:text="${pageInfo.list[0].username}"></span></p>
+</div>
+
+<div>
+    <p th:onclick="'userList()'">666现身</p>
+</div>
+<a th:href="@{/user/list}">用户列表</a>
+
+<p><span th:text="|welcome to our application, ${pageInfo.list[9].username}!|"></span></p>
+<p><span th:text="'welcome to our application,' + ${pageInfo.list[9].username} + '!' "></span></p>
+用户for循环输出
+<tr th:each="nice:${pageInfo.list}">
+    <td th:text="${nice.id}">id</td>
+    <td th:text="${nice.username}">username</td>
+    <td th:text="${nice.password}">password</td>
+</tr>
+<p th:text="${pageInfo.list[1].password}"></p>
+<a th:if="${pageInfo.list[1].password == '6666'}">nice to see you</a>
+<a th:unless="${pageInfo.list[1].password == null}">nice to see you again</a>
+<script>
+    function userList() {
+        alert("666");
+    }
+</script>
+</body>
+</html>
